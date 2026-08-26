@@ -1,0 +1,130 @@
+export type ToolStatus = "coming" | "prototype" | "available";
+
+export type Tool = {
+  slug: string;
+  name: string;
+  oneLiner: string;
+  problem: string;
+  does: string;
+  carryIn: string;
+  runLocal?: string;
+  related: string[];
+  status: ToolStatus;
+};
+
+export const tools: Tool[] = [
+  {
+    slug: "avatar",
+    name: "Avatar",
+    oneLiner:
+      "Unique profile pics from a seed. Same name, same face, every time.",
+    problem:
+      "Isolated boxes still have people on them. Those people need a face in the local wiki, the chat, the board on the wall. Gravatar will never answer.",
+    does:
+      "The decomm mark minus the plug: a socket with two eyes. Type a seed, get an SVG. Same seed, same drawing, slight combinations across names. No CDN, no account, no round trip.",
+    carryIn:
+      "deno run --allow-read=. --allow-write=./avatar ./init.ts ./avatar",
+    runLocal: "cd avatar && deno task compile && ./avatar.sh",
+    related: ["ident", "qr"],
+    status: "available",
+  },
+  {
+    slug: "ident",
+    name: "Ident",
+    oneLiner: "A face and a name for a box with no accounts.",
+    problem:
+      "There is no SSO on the far side of the unplug. You still want to know who is sitting at this machine.",
+    does:
+      "A local identity kit: handle, color, fingerprint, avatar. Print it, pin it, put it next to a name in a file.",
+    carryIn: "deno run -A jsr:@decomm/ident/init ./ident",
+    related: ["avatar", "ca"],
+    status: "coming",
+  },
+  {
+    slug: "ferry",
+    name: "Ferry",
+    oneLiner:
+      "Pack a folder for USB. Hashes on the way out, check them on the way in.",
+    problem:
+      "You copied a folder onto a stick and walked it over. Did every byte survive? Did anything extra hitch a ride?",
+    does:
+      "Manifest the tree, hash every file, pack it, copy it, verify it. A receipt for sneakernet.",
+    carryIn: "deno run -A jsr:@decomm/ferry/init ./ferry",
+    related: ["pack", "inspect"],
+    status: "coming",
+  },
+  {
+    slug: "pack",
+    name: "Pack",
+    oneLiner: "Vendor a Deno project so it runs after the cable comes out.",
+    problem:
+      "`deno run` likes the network. The isolated box does not have one. A tool you cannot start is just a folder of regret.",
+    does:
+      "Lockfile, cache, sources — one folder that runs with `deno run --offline`. The rest of the suite depends on this.",
+    carryIn: "deno run -A jsr:@decomm/pack/init ./pack",
+    related: ["ferry", "inspect"],
+    status: "coming",
+  },
+  {
+    slug: "qr",
+    name: "QR",
+    oneLiner:
+      "Move a small secret with a screen and a camera. No cable, no wifi.",
+    problem:
+      "Two machines, a few kilobytes, and you do not want to plug anything in. USB is a conversation. A QR is a glance.",
+    does:
+      "Encode a file or a secret into QR frames. Film them. Rebuild the bytes on the other side.",
+    carryIn: "deno run -A jsr:@decomm/qr/init ./qr",
+    related: ["ferry", "avatar"],
+    status: "coming",
+  },
+  {
+    slug: "ca",
+    name: "CA",
+    oneLiner: "HTTPS on a LAN that will never see Let's Encrypt.",
+    problem:
+      "Browsers still want certificates. The isolated LAN has no ACME, no public DNS, no second chances from the internet.",
+    does:
+      "A tiny local certificate authority. Issue, trust, renew — all in the folder you carried in.",
+    carryIn: "deno run --allow-read=. --allow-write=./ca ./init.ts ./ca",
+    runLocal: "cd ca && deno task compile && ./ca.sh init --dir ./ca-data",
+    related: ["ident", "inspect"],
+    status: "available",
+  },
+  {
+    slug: "ledger",
+    name: "Ledger",
+    oneLiner:
+      "A log of what happened on this machine that you can hash and trust later.",
+    problem:
+      "Something changed. A note in a text file is a rumor. You want a trail that is annoying to rewrite after the fact.",
+    does:
+      "Append-only entries. Each one hashes the last. Read it back weeks later and see if it still chains.",
+    carryIn:
+      "deno run --allow-read=. --allow-write=./ledger ./init.ts ./ledger",
+    runLocal:
+      "cd ledger && deno task compile && ./ledger.sh --dir ./ledgers serve",
+    related: ["inspect", "ferry"],
+    status: "available",
+  },
+  {
+    slug: "inspect",
+    name: "Inspect",
+    oneLiner: "A hashed inventory of what you carried in.",
+    problem:
+      "You brought a kit onto the box. Weeks later: is it still what you brought, or did a file grow a new friend?",
+    does:
+      "Walk the tree. Hash everything. Compare next time. A packing list for the sandbox.",
+    carryIn: "deno run -A jsr:@decomm/inspect/init ./inspect",
+    related: ["ferry", "pack"],
+    status: "coming",
+  },
+];
+
+export const getTool = (slug: string): Tool | undefined =>
+  tools.find((tool) => tool.slug === slug);
+
+export const relatedTools = (tool: Tool): Tool[] =>
+  tool.related
+    .map((slug) => getTool(slug))
+    .filter((related): related is Tool => related !== undefined);
