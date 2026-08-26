@@ -47,12 +47,30 @@ export default define.page((ctx) => {
           <p class="text-base leading-8 text-paper">{tool.does}</p>
         </section>
 
+        {tool.how && (
+          <section class="mt-10 space-y-3">
+            <h2 class="text-sm font-medium uppercase tracking-[0.18em] text-amber">
+              Hashing and verify
+            </h2>
+            <p class="text-base leading-8 text-paper">{tool.how}</p>
+          </section>
+        )}
+
         {tool.status === "available" && (
           <p class="mt-8 rounded-2xl border border-amber/30 bg-amber/5 px-5 py-4 text-sm leading-6 text-paper">
             This one runs. From the repo:{" "}
             <code class="font-mono text-amber">
               {tool.runLocal ?? `cd ${tool.slug} && deno task dev`}
             </code>
+            {tool.source && (
+              <>
+                {" "}
+                Source:{" "}
+                <a class="text-amber underline" href={tool.source}>
+                  GitHub
+                </a>
+              </>
+            )}
           </p>
         )}
         {tool.status === "prototype" && (

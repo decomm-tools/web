@@ -8,6 +8,8 @@ export type Tool = {
   does: string;
   carryIn: string;
   runLocal?: string;
+  source?: string;
+  how?: string;
   related: string[];
   status: ToolStatus;
 };
@@ -22,9 +24,9 @@ export const tools: Tool[] = [
       "Isolated boxes still have people on them. Those people need a face in the local wiki, the chat, the board on the wall. Gravatar will never answer.",
     does:
       "The decomm mark minus the plug: a socket with two eyes. Type a seed, get an SVG. Same seed, same drawing, slight combinations across names. No CDN, no account, no round trip.",
-    carryIn:
-      "deno run --allow-read=. --allow-write=./avatar ./init.ts ./avatar",
+    carryIn: "deno run -A jsr:@decomm/avatar/init ./avatar",
     runLocal: "cd avatar && deno task compile && ./avatar.sh",
+    source: "https://github.com/decomm-tools/avatar",
     related: ["ident", "qr"],
     status: "available",
   },
@@ -99,11 +101,13 @@ export const tools: Tool[] = [
     problem:
       "Something changed. A note in a text file is a rumor. You want a trail that is annoying to rewrite after the fact.",
     does:
-      "Append-only entries. Each one hashes the last. Read it back weeks later and see if it still chains.",
-    carryIn:
-      "deno run --allow-read=. --allow-write=./ledger ./init.ts ./ledger",
+      "A folder of jsonl ledgers. Each note stores SHA-256 of its index, time, body, and the previous note's hash. CLI for the box, plus a small UI on the LAN. verify walks the chain and fails if an old line was edited.",
+    how:
+      "Hashing is a fingerprint, not encryption. Anyone with the folder can still read the notes. The first note's prev is the word genesis. verify recomputes every hash and checks that prev pointers and indexes still line up. It will not catch a rewrite of the whole file where every hash is recomputed. It will catch a silent edit, a dropped line, or two notes swapped.",
+    carryIn: "deno run -A jsr:@decomm/ledger/init ./ledger",
     runLocal:
       "cd ledger && deno task compile && ./ledger.sh --dir ./ledgers serve",
+    source: "https://github.com/decomm-tools/ledger",
     related: ["inspect", "ferry"],
     status: "available",
   },

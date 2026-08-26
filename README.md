@@ -13,7 +13,7 @@ The catalog lives in `data/tools.ts`.
 
 | Tool                                             | Status    | What it is for                                                              |
 | ------------------------------------------------ | --------- | --------------------------------------------------------------------------- |
-| Avatar                                           | Available | Deterministic profile pics from a seed. Same name, same face. No Gravatar.  |
+| [Avatar](https://github.com/decomm-tools/avatar) | Available | Deterministic profile pics from a seed. Same name, same face. No Gravatar.  |
 | Ident                                            | Coming    | A local face and handle when there is no SSO.                               |
 | Ferry                                            | Coming    | Pack a folder for USB, hash it on the way out, verify on the way in.        |
 | Pack                                             | Coming    | Vendor a Deno project so `deno run --offline` works after the copy.         |
