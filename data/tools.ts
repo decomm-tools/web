@@ -8,7 +8,8 @@ export type Tool = {
   does: string;
   carryIn: string;
   runLocal?: string;
-  source?: string;
+  github?: string;
+  jsr?: string;
   how?: string;
   related: string[];
   status: ToolStatus;
@@ -26,7 +27,8 @@ export const tools: Tool[] = [
       "The decomm mark minus the plug: a socket with two eyes. Type a seed, get an SVG. Same seed, same drawing, slight combinations across names. No CDN, no account, no round trip.",
     carryIn: "deno run -A jsr:@decomm/avatar/init ./avatar",
     runLocal: "cd avatar && deno task compile && ./avatar.sh",
-    source: "https://github.com/decomm-tools/avatar",
+    github: "https://github.com/decomm-tools/avatar",
+    jsr: "https://jsr.io/@decomm/avatar",
     related: ["ident", "qr"],
     status: "available",
   },
@@ -107,7 +109,8 @@ export const tools: Tool[] = [
     carryIn: "deno run -A jsr:@decomm/ledger/init ./ledger",
     runLocal:
       "cd ledger && deno task compile && ./ledger.sh --dir ./ledgers serve",
-    source: "https://github.com/decomm-tools/ledger",
+    github: "https://github.com/decomm-tools/ledger",
+    jsr: "https://jsr.io/@decomm/ledger",
     related: ["inspect", "ferry"],
     status: "available",
   },

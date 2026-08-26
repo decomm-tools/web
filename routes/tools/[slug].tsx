@@ -1,6 +1,7 @@
 import { HttpError } from "fresh";
 import { Head } from "fresh/runtime";
 import { CarryNote } from "@/components/CarryNote.tsx";
+import { SourceLinks } from "@/components/SourceLinks.tsx";
 import { StatusBadge } from "@/components/StatusBadge.tsx";
 import { ToolCard } from "@/components/ToolCard.tsx";
 import { getTool, relatedTools } from "@/data/tools.ts";
@@ -32,6 +33,10 @@ export default define.page((ctx) => {
           <StatusBadge status={tool.status} />
         </div>
         <p class="mt-5 text-lg leading-8 text-mute">{tool.oneLiner}</p>
+        <SourceLinks
+          tool={tool}
+          class="mt-4 flex flex-wrap gap-4 text-sm font-medium"
+        />
 
         <section class="mt-12 space-y-3">
           <h2 class="text-sm font-medium uppercase tracking-[0.18em] text-amber">
@@ -62,15 +67,6 @@ export default define.page((ctx) => {
             <code class="font-mono text-amber">
               {tool.runLocal ?? `cd ${tool.slug} && deno task dev`}
             </code>
-            {tool.source && (
-              <>
-                {" "}
-                Source:{" "}
-                <a class="text-amber underline" href={tool.source}>
-                  GitHub
-                </a>
-              </>
-            )}
           </p>
         )}
         {tool.status === "prototype" && (

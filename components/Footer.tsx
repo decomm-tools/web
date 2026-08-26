@@ -9,9 +9,23 @@ export const Footer = () => (
           Tools for machines that never come back online.
         </p>
       </div>
-      <nav class="flex gap-4 text-sm text-mute">
+      <nav class="flex flex-wrap gap-4 text-sm text-mute">
         <a class="hover:text-paper" href="/tools">Tools</a>
         <a class="hover:text-paper" href="/why">Why</a>
+        <a
+          class="hover:text-paper"
+          href="https://github.com/decomm-tools"
+          rel="noreferrer"
+        >
+          GitHub
+        </a>
+        <a
+          class="hover:text-paper"
+          href="https://jsr.io/@decomm"
+          rel="noreferrer"
+        >
+          JSR
+        </a>
       </nav>
     </div>
   </footer>
