@@ -1,6 +1,6 @@
 import type { Tool } from "@/data/tools.ts";
 
-const linkClass = "relative z-10 text-amber transition hover:underline";
+const linkClass = "text-amber transition hover:underline";
 
 export const SourceLinks = ({
   tool,
