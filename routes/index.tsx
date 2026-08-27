@@ -154,7 +154,7 @@ export default define.page(() => (
               First tools on the list
             </h2>
             <p class="mt-3 max-w-xl text-sm leading-6 text-mute">
-              None of these are pretend downloads. Avatar, CA, and ledger are
+              None of these are pretend downloads. Avatar and ledger are
               available. The rest are pitches for what we build next.
             </p>
           </div>

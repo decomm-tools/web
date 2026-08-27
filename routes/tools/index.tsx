@@ -16,8 +16,8 @@ export default define.page(() => (
         Tools you carry in.
       </h1>
       <p class="mt-5 max-w-2xl text-base leading-7 text-mute">
-        Eight ideas to start. Avatar, CA, and ledger are available. The rest are
-        on the list — not pretend downloads.
+        Eight ideas to start. Avatar and ledger are available. The rest are on
+        the list — not pretend downloads.
       </p>
       <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {tools.map((tool) => <ToolCard key={tool.slug} tool={tool} />)}

@@ -18,7 +18,7 @@ The catalog lives in `data/tools.ts`.
 | Ferry                                            | Coming    | Pack a folder for USB, hash it on the way out, verify on the way in.        |
 | Pack                                             | Coming    | Vendor a Deno project so `deno run --offline` works after the copy.         |
 | QR                                               | Coming    | Move a small secret with a screen and a camera.                             |
-| CA                                               | Available | Your own certificates for HTTPS on a LAN that will never see Let's Encrypt. |
+| CA                                               | Coming    | Your own certificates for HTTPS on a LAN that will never see Let's Encrypt. |
 | [Ledger](https://github.com/decomm-tools/ledger) | Available | Append-only notes. Each hashes the last. `verify` walks the chain.          |
 | Inspect                                          | Coming    | A hashed inventory of what you carried onto the box.                        |
 

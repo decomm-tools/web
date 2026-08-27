@@ -93,7 +93,7 @@ export const tools: Tool[] = [
     carryIn: "deno run --allow-read=. --allow-write=./ca ./init.ts ./ca",
     runLocal: "cd ca && deno task compile && ./ca.sh init --dir ./ca-data",
     related: ["ident", "inspect"],
-    status: "available",
+    status: "coming",
   },
   {
     slug: "ledger",

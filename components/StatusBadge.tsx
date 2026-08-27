@@ -17,7 +17,7 @@ export const StatusBadge = ({ status }: { status: ToolStatus }) => {
   }
   return (
     <span class="inline-flex items-center rounded-full border border-line bg-zinc-900 px-2.5 py-0.5 text-xs font-medium text-mute">
-      Coming
+      Coming soon
     </span>
   );
 };
