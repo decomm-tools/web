@@ -37,7 +37,7 @@ export default define.page(() => (
         <p>
           One runtime. TypeScript without a ceremony. Permissions you can read
           off the command line. A folder you can copy. Init on a connected
-          machine, then `--offline` on the far side.
+          machine, then `--cached-only` on the far side.
         </p>
         <h2 class="pt-4 text-2xl font-semibold tracking-tight text-paper">
           Why carry-in, not an installer
