@@ -39,7 +39,7 @@ const steps = [
     n: "03",
     title: "Run it dark",
     body:
-      "Deno `--offline`. Tight permissions. The box never needs to come back online for the tool to work.",
+      "Deno `--cached-only`. Tight permissions. The box never needs to come back online for the tool to work.",
   },
 ];
 
