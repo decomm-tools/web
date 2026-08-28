@@ -60,11 +60,11 @@ export const tools: Tool[] = [
   {
     slug: "pack",
     name: "Pack",
-    oneLiner: "Vendor a Deno project so it runs after the cable comes out.",
+    oneLiner: "Seal a Deno project so it runs after the cable comes out.",
     problem:
       "`deno run` likes the network. The isolated box does not have one. A tool you cannot start is just a folder of regret.",
     does:
-      "Lockfile, cache, sources — one folder that runs with `deno run --offline`. The rest of the suite depends on this.",
+      "Lockfile, cached modules, sources — one folder that runs with `deno run --cached-only`. The rest of the suite depends on this, unlike Deno pack.",
     carryIn: "deno run -A jsr:@decomm/pack/init ./pack",
     related: ["ferry", "inspect"],
     status: "coming",
