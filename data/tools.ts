@@ -64,7 +64,7 @@ export const tools: Tool[] = [
     problem:
       "`deno run` likes the network. The isolated box does not have one. A tool you cannot start is just a folder of regret.",
     does:
-      "Lockfile, cached modules, sources — one folder that runs with `deno run --cached-only`. The rest of the suite depends on this, unlike Deno pack.",
+      "Lockfile, cached modules, sources — one folder that runs with `deno run --cached-only`. This is not Deno's `pack` command (npm tarballs). The rest of the suite depends on this.",
     carryIn: "deno run -A jsr:@decomm/pack/init ./pack",
     related: ["ferry", "inspect"],
     status: "coming",
