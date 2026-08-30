@@ -1,3 +1,4 @@
+import { ExampleBlock } from "@/components/ExampleBlock.tsx";
 import { SourceLinks } from "@/components/SourceLinks.tsx";
 import { StatusBadge } from "@/components/StatusBadge.tsx";
 import type { Tool } from "@/data/tools.ts";
@@ -12,7 +13,8 @@ export const ToolCard = ({ tool }: { tool: Tool }) => (
       </h3>
       <StatusBadge status={tool.status} />
     </div>
-    <p class="flex-1 text-sm leading-6 text-mute">{tool.oneLiner}</p>
+    <p class="text-sm leading-6 text-mute">{tool.oneLiner}</p>
+    <ExampleBlock tool={tool} compact />
     <div class="mt-5 flex items-center justify-between gap-3">
       <a
         href={`/tools/${tool.slug}`}

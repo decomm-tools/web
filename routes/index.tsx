@@ -1,7 +1,7 @@
 import { Head } from "fresh/runtime";
 import { CarryNote } from "@/components/CarryNote.tsx";
 import { ToolCard } from "@/components/ToolCard.tsx";
-import { tools } from "@/data/tools.ts";
+import { availableBlurb, tools } from "@/data/tools.ts";
 import { define } from "@/utils.ts";
 
 const problems = [
@@ -154,8 +154,10 @@ export default define.page(() => (
               First tools on the list
             </h2>
             <p class="mt-3 max-w-xl text-sm leading-6 text-mute">
-              None of these are pretend downloads. Avatar and ledger are
-              available. The rest are pitches for what we build next.
+              None of these are pretend downloads.{" "}
+              {availableBlurb()}. Ident and Task stay coming until they ship.
+              Each card shows a command so you can see what running it looks
+              like.
             </p>
           </div>
           <a
@@ -165,7 +167,7 @@ export default define.page(() => (
             Full catalog
           </a>
         </div>
-        <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {tools.map((tool) => <ToolCard key={tool.slug} tool={tool} />)}
         </div>
       </div>
