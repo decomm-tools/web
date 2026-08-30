@@ -1,6 +1,7 @@
 import { HttpError } from "fresh";
 import { Head } from "fresh/runtime";
 import { CarryNote } from "@/components/CarryNote.tsx";
+import { ExampleBlock } from "@/components/ExampleBlock.tsx";
 import { SourceLinks } from "@/components/SourceLinks.tsx";
 import { StatusBadge } from "@/components/StatusBadge.tsx";
 import { ToolCard } from "@/components/ToolCard.tsx";
@@ -50,6 +51,18 @@ export default define.page((ctx) => {
             What it does
           </h2>
           <p class="text-base leading-8 text-paper">{tool.does}</p>
+        </section>
+
+        <section class="mt-10 space-y-3">
+          <h2 class="text-sm font-medium uppercase tracking-[0.18em] text-amber">
+            Example
+          </h2>
+          <p class="text-sm leading-6 text-mute">
+            {tool.status === "available"
+              ? "What running it looks like."
+              : "What running it will look like, once this one ships."}
+          </p>
+          <ExampleBlock tool={tool} />
         </section>
 
         {tool.how && (
