@@ -15,7 +15,7 @@ one-liner — so a visitor can see what using it looks like.
 | Tool                                             | Status    | What it is for                                                              |
 | ------------------------------------------------ | --------- | --------------------------------------------------------------------------- |
 | [Avatar](https://github.com/decomm-tools/avatar) | Available | Deterministic profile pics from a seed. Same name, same face. No Gravatar.  |
-| Ident                                            | Coming    | A local face and handle when there is no SSO.                               |
+| [Ident](https://github.com/decomm-tools/ident)   | Available | A local face and handle when there is no SSO.                               |
 | Task                                             | Coming    | A local board on Deno KV. No cloud, no accounts.                            |
 | [Ferry](https://github.com/decomm-tools/ferry)   | Available | Pack a folder for USB, hash it on the way out, verify on the way in.        |
 | [Pack](https://github.com/decomm-tools/pack)     | Available | Seal a Deno project for `--cached-only`. Not Deno's `pack` (npm tarballs).  |
@@ -24,7 +24,7 @@ one-liner — so a visitor can see what using it looks like.
 | [Ledger](https://github.com/decomm-tools/ledger) | Available | Append-only notes. Each hashes the last. `verify` walks the chain.          |
 | Inspect                                          | Coming    | A hashed inventory of what you carried onto the box.                        |
 
-Ident and Task stay Coming until they ship.
+Task stays Coming until it ships.
 
 Ledger hashing is not encryption. It is a fingerprint of each note plus a
 pointer to the previous fingerprint. Edit an old line and `verify` fails.

@@ -11,8 +11,13 @@ Deno.test("every tool has a run example", () => {
   }
 });
 
-Deno.test("ident and task stay coming", () => {
-  assertEquals(getTool("ident")?.status, "coming");
+Deno.test("ident is available and task stays coming", () => {
+  assertEquals(getTool("ident")?.status, "available");
+  assertEquals(
+    getTool("ident")?.github,
+    "https://github.com/decomm-tools/ident",
+  );
+  assertEquals(getTool("ident")?.jsr, "https://jsr.io/@decomm/ident");
   assertEquals(getTool("task")?.status, "coming");
 });
 
@@ -26,7 +31,7 @@ Deno.test("available blurb names the shipped tools", () => {
   assertStringIncludes(availableBlurb(), "Avatar");
   assertStringIncludes(availableBlurb(), "Ledger");
   assertStringIncludes(availableBlurb(), "available");
-  assertEquals(availableBlurb().includes("Ident"), false);
+  assertStringIncludes(availableBlurb(), "Ident");
   assertEquals(availableBlurb().includes("Task"), false);
 });
 

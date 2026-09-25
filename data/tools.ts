@@ -65,12 +65,15 @@ export const tools: Tool[] = [
       {
         run: "./ident.sh --dir ./idents show holden",
         out:
-          "holden\nseed holden\ncolor #e8a317 (warm)\nfingerprint 00a503d3-5d63ac5f",
+          "holden\nseed holden\ncolor #e8a317 (warm)\nfingerprint 00a503d3-5d63ac5f\n./idents/holden/face.svg\n./idents/holden/card.html",
       },
     ],
     carryIn: "deno run -A jsr:@decomm/ident/init ./ident",
+    runLocal: "cd ident && deno task compile && ./ident.sh",
+    github: "https://github.com/decomm-tools/ident",
+    jsr: "https://jsr.io/@decomm/ident",
     related: ["avatar", "task"],
-    status: "coming",
+    status: "available",
   },
   {
     slug: "task",

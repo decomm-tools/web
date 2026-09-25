@@ -16,8 +16,8 @@ export default define.page(() => (
         Tools you carry in.
       </h1>
       <p class="mt-5 max-w-2xl text-base leading-7 text-mute">
-        {availableBlurb()}. Ident and Task stay coming until they ship. Each
-        pitch shows what running it looks like.
+        {availableBlurb()}. Task stays coming until it ships. Each pitch shows
+        what running it looks like.
       </p>
       <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {tools.map((tool) => <ToolCard key={tool.slug} tool={tool} />)}
