@@ -151,3 +151,69 @@ Deno.test({
     assertStringIncludes(example?.out ?? "", "deno run --cached-only main.ts");
   },
 });
+
+Deno.test({
+  name: "task.sh init add move list is the pitch example",
+  ignore: siblingDir("task") === null,
+  fn: async () => {
+    const dir = await Deno.makeTempDir({ prefix: "decomm-web-task-" });
+    try {
+      const example = getTool("task")?.example ?? [];
+      const outs = [];
+      for (
+        const args of [
+          ["init"],
+          ["add", "swap the drive", "--assignee", "holden"],
+          ["move", "1", "doing"],
+          ["list", "--status", "doing"],
+        ]
+      ) {
+        outs.push((await runSh("task", ["--dir", dir, ...args])).stdout.trim());
+      }
+      assertStringIncludes(outs[0], "Task board");
+      assertEquals(outs.slice(1), example.slice(1).map((step) => step.out));
+    } finally {
+      await Deno.remove(dir, { recursive: true });
+    }
+  },
+});
+
+Deno.test({
+  name: "ca.sh init issue trust is the pitch example",
+  ignore: siblingDir("ca") === null,
+  fn: async () => {
+    const dir = await Deno.makeTempDir({ prefix: "decomm-web-ca-" });
+    try {
+      const example = getTool("ca")?.example ?? [];
+      assertStringIncludes(
+        (await runSh("ca", ["--dir", dir, "init", "--name", "sandbox CA"]))
+          .stdout,
+        "CA created in",
+      );
+      const issued = await runSh("ca", [
+        "--dir",
+        dir,
+        "issue",
+        "--cn",
+        "box.local",
+        "--dns",
+        "box.local",
+        "--ip",
+        "10.0.0.5",
+      ]);
+      assertStringIncludes(issued.stdout, "Issued box.local in");
+      const listed = (await runSh("ca", ["--dir", dir, "list"])).stdout;
+      assertStringIncludes(listed, "dns=box.local  ip=10.0.0.5");
+      assertStringIncludes(example[2]?.out ?? "", "dns=box.local  ip=10.0.0.5");
+      const pem = `${dir}/ca.pem`;
+      assertStringIncludes(
+        (await runSh("ca", ["--dir", dir, "trust", "--out", pem])).stdout,
+        "Wrote",
+      );
+      assertStringIncludes(await Deno.readTextFile(pem), "BEGIN CERTIFICATE");
+      assertEquals(example[3]?.out, "Wrote ./ca.pem");
+    } finally {
+      await Deno.remove(dir, { recursive: true });
+    }
+  },
+});

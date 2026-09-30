@@ -155,8 +155,9 @@ export default define.page(() => (
             </h2>
             <p class="mt-3 max-w-xl text-sm leading-6 text-mute">
               None of these are pretend downloads.{" "}
-              {availableBlurb()}. Task stays coming until it ships. Each card
-              shows a command so you can see what running it looks like.
+              {availableBlurb()}. QR and Inspect stay coming until they ship.
+              Each card shows a command so you can see what running it looks
+              like.
             </p>
           </div>
           <a
