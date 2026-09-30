@@ -82,28 +82,31 @@ export const tools: Tool[] = [
     problem:
       "The isolated box still has work on it. Notion is HQ for the connected team. The far side needs its own board that never phones home.",
     does:
-      "A carry-in folder with a sqlite KV file you can ferry. CLI is the source of truth: init, add, show, list, move, assign, serve. Statuses are backlog, todo, doing, done. serve is a small LAN board over the same store.",
+      "A carry-in folder with a sqlite KV file you can ferry. CLI is the source of truth: init, add, show, list, move, assign, serve. Statuses are backlog, todo, doing, done. serve is a small LAN board over the same store on port 8788. Deno KV still needs --unstable-kv; task.sh and the compiled binary pass it for you.",
     example: [
       {
         run: "./task.sh --dir ./tasks init",
-        out: "Task folder ./tasks",
+        out: "Task board ./tasks/task.sqlite3",
       },
       {
-        run: './task.sh --dir ./tasks add "swap the drive"',
-        out: "#1  backlog  swap the drive",
+        run: './task.sh --dir ./tasks add "swap the drive" --assignee holden',
+        out: "#1 swap the drive",
       },
       {
         run: "./task.sh --dir ./tasks move 1 doing",
-        out: "#1  doing  swap the drive",
+        out: "#1 -> doing",
       },
       {
-        run: "./task.sh --dir ./tasks assign 1 holden",
-        out: "#1  doing  holden  swap the drive",
+        run: "./task.sh --dir ./tasks list --status doing",
+        out: "#1  doing    holden        swap the drive",
       },
     ],
     carryIn: "deno run -A jsr:@decomm/task/init ./task",
+    runLocal: "cd task && deno task compile && ./task.sh --dir ./tasks serve",
+    github: "https://github.com/decomm-tools/task",
+    jsr: "https://jsr.io/@decomm/task",
     related: ["ident", "ledger"],
-    status: "coming",
+    status: "available",
   },
   {
     slug: "ferry",
@@ -183,26 +186,33 @@ export const tools: Tool[] = [
     problem:
       "Browsers still want certificates. The isolated LAN has no ACME, no public DNS, no second chances from the internet.",
     does:
-      "A tiny local certificate authority. Issue, trust, renew — all in the folder you carried in.",
+      "A tiny local certificate authority. Create a root, issue host certs, write the trust bundle — all in the folder you carried in. Keys stay in --dir (./ca-data by default). Nothing phones home.",
     example: [
       {
-        run: './ca.sh init --dir ./ca-data --name "sandbox CA"',
+        run: './ca.sh --dir ./ca-data init --name "sandbox CA"',
         out: "CA created in ./ca-data",
       },
       {
         run:
-          "./ca.sh issue --dir ./ca-data --cn box.local --dns box.local --ip 10.0.0.5",
+          "./ca.sh --dir ./ca-data issue --cn box.local --dns box.local --ip 10.0.0.5",
         out: "Issued box.local in ./ca-data/issued",
       },
       {
-        run: "./ca.sh trust --dir ./ca-data --out ./ca.pem",
+        run: "./ca.sh --dir ./ca-data list",
+        out:
+          "box.local  serial=69c3f3d351a2e2c034e15f69d1a892ab  until=2027-09-30T12:29:59.000Z  dns=box.local  ip=10.0.0.5",
+      },
+      {
+        run: "./ca.sh --dir ./ca-data trust --out ./ca.pem",
         out: "Wrote ./ca.pem",
       },
     ],
-    carryIn: "deno run --allow-read=. --allow-write=./ca ./init.ts ./ca",
-    runLocal: "cd ca && deno task compile && ./ca.sh init --dir ./ca-data",
+    carryIn: "deno run -A jsr:@decomm/ca/init ./ca",
+    runLocal: "cd ca && deno task compile && ./ca.sh",
+    github: "https://github.com/decomm-tools/ca",
+    jsr: "https://jsr.io/@decomm/ca",
     related: ["ident", "inspect"],
-    status: "coming",
+    status: "available",
   },
   {
     slug: "ledger",
