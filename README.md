@@ -16,15 +16,15 @@ one-liner — so a visitor can see what using it looks like.
 | ------------------------------------------------ | --------- | --------------------------------------------------------------------------- |
 | [Avatar](https://github.com/decomm-tools/avatar) | Available | Deterministic profile pics from a seed. Same name, same face. No Gravatar.  |
 | [Ident](https://github.com/decomm-tools/ident)   | Available | A local face and handle when there is no SSO.                               |
-| Task                                             | Coming    | A local board on Deno KV. No cloud, no accounts.                            |
+| [Task](https://github.com/decomm-tools/task)     | Available | A local board on Deno KV. No cloud, no accounts.                            |
 | [Ferry](https://github.com/decomm-tools/ferry)   | Available | Pack a folder for USB, hash it on the way out, verify on the way in.        |
 | [Pack](https://github.com/decomm-tools/pack)     | Available | Seal a Deno project for `--cached-only`. Not Deno's `pack` (npm tarballs).  |
 | QR                                               | Coming    | Move a small secret with a screen and a camera.                             |
-| CA                                               | Coming    | Your own certificates for HTTPS on a LAN that will never see Let's Encrypt. |
+| [CA](https://github.com/decomm-tools/ca)         | Available | Your own certificates for HTTPS on a LAN that will never see Let's Encrypt. |
 | [Ledger](https://github.com/decomm-tools/ledger) | Available | Append-only notes. Each hashes the last. `verify` walks the chain.          |
 | Inspect                                          | Coming    | A hashed inventory of what you carried onto the box.                        |
 
-Task stays Coming until it ships.
+QR and Inspect stay Coming until they ship.
 
 Ledger hashing is not encryption. It is a fingerprint of each note plus a
 pointer to the previous fingerprint. Edit an old line and `verify` fails.

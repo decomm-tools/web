@@ -11,14 +11,24 @@ Deno.test("every tool has a run example", () => {
   }
 });
 
-Deno.test("ident is available and task stays coming", () => {
-  assertEquals(getTool("ident")?.status, "available");
-  assertEquals(
-    getTool("ident")?.github,
-    "https://github.com/decomm-tools/ident",
-  );
-  assertEquals(getTool("ident")?.jsr, "https://jsr.io/@decomm/ident");
-  assertEquals(getTool("task")?.status, "coming");
+Deno.test("ident, task, and ca are available with links", () => {
+  for (const slug of ["ident", "task", "ca"]) {
+    assertEquals(getTool(slug)?.status, "available");
+    assertEquals(
+      getTool(slug)?.github,
+      `https://github.com/decomm-tools/${slug}`,
+    );
+    assertEquals(getTool(slug)?.jsr, `https://jsr.io/@decomm/${slug}`);
+    assertEquals(
+      getTool(slug)?.carryIn,
+      `deno run -A jsr:@decomm/${slug}/init ./${slug}`,
+    );
+  }
+});
+
+Deno.test("qr and inspect stay coming", () => {
+  assertEquals(getTool("qr")?.status, "coming");
+  assertEquals(getTool("inspect")?.status, "coming");
 });
 
 Deno.test("catalog lists task next to ident", () => {
@@ -32,7 +42,10 @@ Deno.test("available blurb names the shipped tools", () => {
   assertStringIncludes(availableBlurb(), "Ledger");
   assertStringIncludes(availableBlurb(), "available");
   assertStringIncludes(availableBlurb(), "Ident");
-  assertEquals(availableBlurb().includes("Task"), false);
+  assertStringIncludes(availableBlurb(), "Task");
+  assertStringIncludes(availableBlurb(), "CA");
+  assertEquals(availableBlurb().includes("QR"), false);
+  assertEquals(availableBlurb().includes("Inspect"), false);
 });
 
 Deno.test("exampleCommands is the copy payload", () => {
